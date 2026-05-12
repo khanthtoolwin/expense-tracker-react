@@ -1,7 +1,6 @@
 import React from "react";
 import ExpenseItem from "../ExpenseItem/ExpenseItem";
-import ExpenseComposerForm from "../ExpenseComposer/ExpenseComposerForm";
-const ExpenseList = ({ filteredExpenses, handleCreateExpense }) => {
+const ExpenseList = ({ filteredExpenses }) => {
   return (
     <>
       <div>
@@ -19,7 +18,6 @@ const ExpenseList = ({ filteredExpenses, handleCreateExpense }) => {
           ))}
         </ul>
       </div>
-      <ExpenseComposerForm handleCreateExpense={handleCreateExpense} />
     </>
   );
 };

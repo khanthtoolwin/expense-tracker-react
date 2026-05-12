@@ -4,42 +4,32 @@ import ExpenseList from "./Components/ExpenseList/ExpenseList";
 import FilterTabs from "./Components/Tabs/FilterTabs";
 import NoTransaction from "./Components/ExpenseList/NoTransaction";
 import BalanceDashboard from "./Components/Dashboard/BalanceDashboard";
+import ExpenseComposerForm from "./Components/ExpenseComposer/ExpenseComposerForm";
 const App = () => {
   const [expenses, setExpenses] = React.useState([]);
   const [filterKey, setFilterKey] = React.useState("All");
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   React.useEffect(() => {
-    let ignore = false;
     const fetchData = async () => {
       setIsLoading(true);
       const url = "http://localhost:5000/expenses";
       try {
         const response = await fetch(url);
-
         if (!response.ok) {
           throw new Error("Server responded with an error.");
         }
         const data = await response.json();
-        if (ignore === false) {
-          setExpenses(data);
-          setError(null);
-        }
+        setExpenses(data);
+        setError(null);
       } catch (error) {
-        if (ignore === false) {
-          setExpenses([]);
-          setError(error.message);
-        }
+        setExpenses([]);
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
     };
     fetchData();
-
-    console.log(`rendered`);
-    return () => {
-      ignore = true;
-    };
   }, []);
   const handleCreateExpense = (newExpense) => {
     const newExpenses = [newExpense, ...expenses];
@@ -71,9 +61,7 @@ const App = () => {
         <BalanceDashboard expenses={expenses} />
 
         <div className="hero-section">
-          <h2
-            style={{ textAlign: "center", marginBottom: 0, marginTop: "16px" }}
-          >
+          <h2 style={{ textAlign: "center" }}>
             Your Recent
             {filterKey === "All"
               ? " Transactions"
@@ -85,21 +73,21 @@ const App = () => {
           {/** Filter according to type of flow */}
           <FilterTabs filterKey={filterKey} setFilterKey={setFilterKey} />
         </div>
-        {isLoading && (
-          <p style={{ textAlign: "center" }}>Fetching transactions...</p>
-        )}
-        {!isLoading && expenses.length > 0 && (
-          /** Show expense items */
+        {isLoading ? (
+          <div className="loading">
+            <div className="spinner"></div>
+            <h4 className="loading-text">Fetching transactions...</h4>
+          </div>
+        ) : filteredExpenses.length === 0 ? (
+          <NoTransaction filterKey={filterKey} />
+        ) : (
           <ExpenseList
             filterKey={filterKey}
             filteredExpenses={filteredExpenses}
             handleCreateExpense={handleCreateExpense}
-            isLoading={isLoading}
           />
         )}
-        {!isLoading && expenses.length === 0 && (
-          <NoTransaction filterKey={filterKey} />
-        )}
+        <ExpenseComposerForm handleCreateExpense={handleCreateExpense} />
       </div>
     </>
   );
