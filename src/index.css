@@ -1,0 +1,24 @@
+/* Example for Inter and JetBrains Mono */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+body {
+  font-family: "Google Sans", sans-serif;
+}
+
+.amount {
+  font-family: "JetBrains Mono", monospace;
+}
+
+p {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.02rem;
+  margin-top: 0;
+}
+
+.hero-section {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 4px 8px 16px 8px;
+  margin: 0 auto;
+}

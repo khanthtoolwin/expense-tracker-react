@@ -1,0 +1,17 @@
+.green {
+  color: #84cc16;
+}
+
+.red {
+  color: #fb7185;
+}
+
+.neutral {
+  color: gray;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

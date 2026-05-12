@@ -1,0 +1,82 @@
+.form-container {
+  margin-top: 32px;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  /* Optional: a very light shadow to make it pop */
+  box-shadow: 3px 4px 15px rgba(59, 59, 59, 0.247);
+}
+
+.form-control {
+  margin-bottom: 16px;
+}
+
+.form-control label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #64748b; /* Subtle Slate Gray */
+}
+
+.form-control input {
+  width: 100%;
+  padding: 8px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit; /* Keeps your chosen font consistent */
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  box-sizing: border-box; /* Ensures padding doesn't break width */
+}
+
+/* The "Active" state */
+.form-control input:focus {
+  outline: none;
+  border-color: #3b82f6; /* Your primary blue */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.form-control select {
+  width: 100%;
+  padding: 8px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  appearance: none; /* Removes default browser arrow if you want to custom style */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+.form-control select:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+.btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #161616;
+}
+
+.btn:active {
+  transform: scale(0.95); /* Tiny "squish" effect when clicked */
+}

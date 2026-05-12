@@ -1,0 +1,25 @@
+.tabs {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding-inline-start: 0;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+.tabs .tab-item {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tabs .tab-item:hover {
+  font-weight: 600;
+}
+
+.active-tab {
+  color: #007bff; /* Bright blue */
+  border-bottom: 3px solid #007bff;
+  font-weight: bold;
+}
