@@ -1,6 +1,10 @@
 import React from "react";
 import ExpenseItem from "../ExpenseItem/ExpenseItem";
-const ExpenseList = ({ filteredExpenses }) => {
+const ExpenseList = ({
+  filteredExpenses,
+  handleUpdateExpense,
+  handleDeleteExpense,
+}) => {
   return (
     <>
       <div>
@@ -13,7 +17,11 @@ const ExpenseList = ({ filteredExpenses }) => {
         >
           {filteredExpenses.map((expense) => (
             <div key={expense.id}>
-              <ExpenseItem expense={expense} />
+              <ExpenseItem
+                expense={expense}
+                handleDeleteExpense={handleDeleteExpense}
+                handleUpdateExpense={handleUpdateExpense}
+              />
             </div>
           ))}
         </ul>

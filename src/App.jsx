@@ -10,6 +10,7 @@ const App = () => {
   const [filterKey, setFilterKey] = React.useState("All");
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const [editingExpense, setEditingExpense] = React.useState(null);
   React.useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -32,8 +33,38 @@ const App = () => {
     fetchData();
   }, []);
   const handleCreateExpense = (newExpense) => {
+    fetch("http://localhost:5000/expenses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newExpense),
+    });
+
     const newExpenses = [newExpense, ...expenses];
     setExpenses(newExpenses);
+  };
+
+  const handleDeleteExpense = (id) => {
+    fetch(`http://localhost:5000/expenses/${id}`, {
+      method: "DELETE",
+    });
+    const remainingExpenses = expenses.filter((expense) => expense.id !== id);
+    setExpenses([...remainingExpenses]);
+  };
+
+  const handleUpdateExpense = (updatedExpense) => {
+    fetch(`http://localhost:5000/expenses/${updatedExpense.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedExpense),
+    });
+    setExpenses(
+      expenses.map((e) => (e.id === updatedExpense.id ? updatedExpense : e)),
+    );
+    setEditingExpense(null);
   };
 
   const filteredExpenses = expenses.filter((item) => {
@@ -52,10 +83,12 @@ const App = () => {
     <>
       {error && <p className="red">{error}</p>}
       <div style={{ ...mainContainerStyle }}>
-        <h1 style={{ letterSpacing: "-0.01em", marginBottom: 0 }}>
+        <h1 style={{ letterSpacing: "0.01em", marginBottom: 0 }}>
           EXPENSE TRACKER
         </h1>
-        <p>Manage your daily expenses</p>
+        <p style={{ marginTop: 0, marginBottom: 32 }}>
+          Manage your daily expenses
+        </p>
 
         {/** Show user balance amount */}
         <BalanceDashboard expenses={expenses} />
@@ -82,9 +115,10 @@ const App = () => {
           <NoTransaction filterKey={filterKey} />
         ) : (
           <ExpenseList
-            filterKey={filterKey}
+            setEditingExpense={setEditingExpense}
+            handleUpdateExpense={handleUpdateExpense}
             filteredExpenses={filteredExpenses}
-            handleCreateExpense={handleCreateExpense}
+            handleDeleteExpense={handleDeleteExpense}
           />
         )}
         <ExpenseComposerForm handleCreateExpense={handleCreateExpense} />

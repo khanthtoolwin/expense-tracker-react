@@ -1,28 +1,29 @@
 {
   "expenses": [
     {
-      "id": 1,
-      "text": "Breakfast",
-      "amount": 4500,
-      "type": "expense"
-    },
-    {
-      "id": 2,
+      "id": "2",
       "text": "Salary",
       "amount": 450000,
       "type": "income"
     },
     {
-      "id": 3,
-      "text": "Sneakers",
+      "id": "3",
+      "text": "DM Loafers",
       "amount": 180000,
       "type": "expense"
     },
     {
-      "id": 4,
+      "id": "4",
       "text": "Fix PC",
       "amount": 80000,
       "type": "expense"
+    },
+    {
+      "id": "ikHxQ5RfHWs",
+      "text": "Coffee",
+      "amount": 4500,
+      "type": "expense"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

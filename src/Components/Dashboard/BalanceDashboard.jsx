@@ -12,7 +12,7 @@ const BalanceDashboard = ({ expenses }) => {
   return (
     <div className="dashboard-container">
       <h3>Your Balance</h3>
-      <h2 className="amount">{Math.abs(totalBalance).toLocaleString()} MMK</h2>
+      <h2 className="amount">{totalBalance.toLocaleString()} MMK</h2>
     </div>
   );
 };

@@ -32,10 +32,6 @@ const ExpenseComposerForm = ({ handleCreateExpense }) => {
     setType("");
   };
 
-  const handleOpenForm = () => {
-    setIsOpen(!isOpen);
-  };
-
   const toggleButton = {
     display: "flex",
     alignItems: "center",
@@ -59,12 +55,12 @@ const ExpenseComposerForm = ({ handleCreateExpense }) => {
           }}
         >
           {isOpen === false ? (
-            <div style={{ ...toggleButton }} onClick={handleOpenForm}>
+            <div style={{ ...toggleButton }} onClick={() => setIsOpen(!isOpen)}>
               <small>Toggle Form</small>
               <CgChevronDownO style={{ fontSize: "24px" }} />
             </div>
           ) : (
-            <div style={{ ...toggleButton }} onClick={handleOpenForm}>
+            <div style={{ ...toggleButton }} onClick={() => setIsOpen(!isOpen)}>
               <small>Toggle Form</small>
               <CgChevronUpO style={{ fontSize: "24px" }} />
             </div>
@@ -96,6 +92,7 @@ const ExpenseComposerForm = ({ handleCreateExpense }) => {
                 <input
                   type="number"
                   value={amount}
+                  placeholder="6767"
                   onChange={(e) => setAmount(e.target.value)}
                 />
               </div>

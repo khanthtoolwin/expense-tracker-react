@@ -5,8 +5,7 @@
   padding-inline-start: 0;
   font-weight: 500;
   font-size: 16px;
-  padding: 8px;
-  gap: 10;
+  padding: 4px 40px;
 }
 
 .tabs .tab-item {
@@ -16,11 +15,11 @@
 }
 
 .tabs .tab-item:hover {
-  font-weight: 600;
+  opacity: 0.8;
 }
 
 .active-tab {
   color: #007bff; /* Bright blue */
-  border-bottom: 3px solid #007bff;
+  border-bottom: 2px solid #007bff;
   font-weight: bold;
 }
