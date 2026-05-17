@@ -1,4 +1,3 @@
-import React from "react";
 import "./Dashboard.css";
 const BalanceDashboard = ({ expenses }) => {
   const totalBalance = expenses.reduce((state, currentObj) => {

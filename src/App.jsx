@@ -33,34 +33,43 @@ const App = () => {
     fetchData();
   }, []);
   const handleCreateExpense = (newExpense) => {
-    fetch("http://localhost:5000/expenses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newExpense),
-    });
+    const fetchData = async () => {
+      await fetch("http://localhost:5000/expenses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newExpense),
+      }).catch((e) => setError(e.message));
+    };
+    fetchData();
 
     const newExpenses = [newExpense, ...expenses];
     setExpenses(newExpenses);
   };
 
   const handleDeleteExpense = (id) => {
-    fetch(`http://localhost:5000/expenses/${id}`, {
-      method: "DELETE",
-    });
+    const fetchData = async () => {
+      await fetch(`http://localhost:5000/expenses/${id}`, {
+        method: "DELETE",
+      }).catch((e) => setError(e.message));
+    };
+    fetchData();
     const remainingExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses([...remainingExpenses]);
   };
 
   const handleUpdateExpense = (updatedExpense) => {
-    fetch(`http://localhost:5000/expenses/${updatedExpense.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedExpense),
-    });
+    const fetchData = async () => {
+      await fetch(`http://localhost:5000/expenses/${updatedExpense.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedExpense),
+      }).catch((e) => setError(e.message));
+    };
+    fetchData();
     setExpenses(
       expenses.map((e) => (e.id === updatedExpense.id ? updatedExpense : e)),
     );
@@ -121,7 +130,12 @@ const App = () => {
             handleDeleteExpense={handleDeleteExpense}
           />
         )}
-        <ExpenseComposerForm handleCreateExpense={handleCreateExpense} />
+
+        <ExpenseComposerForm
+          editingExpense={editingExpense}
+          handleUpdateExpense={handleUpdateExpense}
+          handleCreateExpense={handleCreateExpense}
+        />
       </div>
     </>
   );

@@ -2,12 +2,29 @@ import React from "react";
 import "./ExpenseComposerForm.css";
 import { CgChevronDownO } from "react-icons/cg";
 import { CgChevronUpO } from "react-icons/cg";
-const ExpenseComposerForm = ({ handleCreateExpense }) => {
+const ExpenseComposerForm = ({
+  editingExpense,
+  handleUpdateExpense,
+  handleCreateExpense,
+}) => {
   const [text, setText] = React.useState("");
   const [amount, setAmount] = React.useState("");
   const [type, setType] = React.useState("income");
 
   const [isOpen, setIsOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (editingExpense) {
+      setText(editingExpense?.text ?? "");
+      setAmount(editingExpense?.amount ?? "");
+      setType(editingExpense?.type ?? "income");
+      setIsOpen(!!editingExpense);
+    } else {
+      setText("");
+      setAmount("");
+      setType("income");
+    }
+  }, [editingExpense]);
 
   function createExpense(text, amount, type) {
     return {
@@ -18,18 +35,27 @@ const ExpenseComposerForm = ({ handleCreateExpense }) => {
     };
   }
 
-  const handleCreateExpenseClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const numericAmount = Number(amount);
     if (numericAmount <= 0) {
       alert("Please enter a valid amount");
       return;
     }
-    const expense = createExpense(text, numericAmount, type);
-    handleCreateExpense(expense);
+    if (editingExpense) {
+      handleUpdateExpense({
+        ...editingExpense,
+        text,
+        amount: numericAmount,
+        type,
+      });
+    } else {
+      const expense = createExpense(text, numericAmount, type);
+      handleCreateExpense(expense);
+    }
     setText("");
     setAmount("");
-    setType("");
+    setType("income");
   };
 
   const toggleButton = {
@@ -77,23 +103,25 @@ const ExpenseComposerForm = ({ handleCreateExpense }) => {
 
         {isOpen && (
           <>
-            <form onSubmit={handleCreateExpenseClick}>
+            <form onSubmit={handleSubmit}>
               <div className="form-control">
-                <label htmlFor="">Item Name</label>
+                <label>Item Name</label>
                 <input
                   type="text"
                   value={text}
                   placeholder="e.g., Coffee"
                   onChange={(e) => setText(e.target.value)}
+                  onblur={handleUpdateExpense}
                 />
               </div>
               <div className="form-control">
-                <label htmlFor="">Amount</label>
+                <label>Amount</label>
                 <input
                   type="number"
                   value={amount}
                   placeholder="6767"
                   onChange={(e) => setAmount(e.target.value)}
+                  onblur={handleUpdateExpense}
                 />
               </div>
               <div className="form-control">
@@ -104,7 +132,7 @@ const ExpenseComposerForm = ({ handleCreateExpense }) => {
                 </select>
               </div>
               <button type="submit" className="btn">
-                Submit
+                {editingExpense ? "Update" : "Submit"}
               </button>
             </form>
           </>

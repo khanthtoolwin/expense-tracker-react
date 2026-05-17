@@ -2,7 +2,7 @@
   "expenses": [
     {
       "id": "2",
-      "text": "Salary",
+      "text": "Monthly Salary",
       "amount": 450000,
       "type": "income"
     },
@@ -23,6 +23,12 @@
       "text": "Coffee",
       "amount": 4500,
       "type": "expense"
+    },
+    {
+      "id": "wH9PFfoZ2po",
+      "text": "Night Shift",
+      "amount": 65000,
+      "type": "income"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
